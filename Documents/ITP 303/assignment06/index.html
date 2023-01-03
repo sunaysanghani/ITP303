@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Assignment 6</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
+	<style>
+		.todo-remove {
+			cursor: pointer;
+			color: #CCC;
+		}
+		.todo-remove:hover {
+			color: #dc3545;
+		}
+		.todo-remove:active {
+			color: #ba1323;
+		}
+
+
+		.image { 
+			width: 200px 
+		}
+	</style>
+
+</head>
+<body class="py-4">
+
+	<div class="container">
+		<div class="row">
+			<h1 class="col-12">Favorite Books</h1>
+		</div> <!-- .row -->
+
+		<div class="row mt-4">
+			<h2 class="col-12">Simple Book Information</h2>
+			<div class="col-12 mt-4">
+				<form id="simple-todo">
+					<div class="form-row">
+						<label for="name" class="col-sm-2 col-form-label">Book Name:</label>
+						<div class="col-12 mt-2 col-sm-6 mt-sm-0">
+							<input type="text" class="form-control" id="name" placeholder="Book Name...">
+							<small id="name-error" class="form-text text-danger"></small>
+						</div> <!-- .col -->
+					</div> <!-- .form-row -->
+
+					<div class="form-row">
+						<label for="price" class="col-sm-2 col-form-label">Price ($):</label>
+						<div class="col-12 mt-2 col-sm-6 mt-sm-0">
+							<input type="text" class="form-control" id="price" placeholder="19.00">
+							<small id="price-error" class="form-text text-danger"></small>
+						</div> <!-- .col -->
+					</div>
+					<div class="form-row">
+						<label for="image" class="col-sm-2 col-form-label">Image URL:</label>
+						<div class="col-12 mt-2 col-sm-6 mt-sm-0">
+							<input type="text" name="image" class="form-control" id="image" placeholder="https://...">
+							<small id="image-error" class="form-text text-danger"></small>
+						</div> <!-- .col -->
+					</div>
+
+
+					<div class="row">
+						<div class="col-12 mt-2 col-sm-auto mt-sm-0">
+							<button type="submit" class="btn btn-primary">Add</button>
+						</div>
+						<div class="col-12 mt-2 col-sm-auto mt-sm-0">
+							<button id="reset" type="reset" class="btn btn-light">Reset</button>
+						</div>
+					</div> <!-- .row -->
+				</form>
+			</div> <!-- .col -->
+		</div> <!-- container -->
+
+		<div class="row">
+			<div class="col-12 mt-3">
+
+				<button id="simple-delete" class="btn btn-outline-danger mb-3">Delete All</button>
+
+				<table id="simple-list" class="table table-hover">
+					<thead>
+						<tr>
+							<th>Image</th>
+							<th>Item</th>
+							<th>Price</th>
+							<th>     </th>
+						</tr>
+				
+					</thead>
+
+					<tbody>
+						<tr>
+							<td><img id="currentImg" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1400119211l/10029667.jpg" alt="Image"> </td>
+							<td>Think Like a Champion: Building Success One Victory At A Time</td>
+							<td>$25</td>
+							<td><button id="image-decrease" class="btn btn-outline-danger mb-2">Decrease Image Size</button></td>
+						</tr>
+
+					</tbody>
+
+				</table>
+			</div> <!-- .col -->
+		</div> <!-- .row -->
+	</div>
+
+		
+	<script>
+		const bindRemoveBtns = function() {
+			const buttons = document.querySelectorAll(".todo-remove");
+
+			for (button of buttons) {
+				button.onclick = function() {
+					this.parentElement.parentElement.remove();
+				}
+			}
+		}
+
+		bindRemoveBtns();
+
+		document.querySelector("#simple-delete").onclick = () => {
+			document.querySelector("#simple-list tbody").innerHTML = '';
+		}
+
+		document.querySelector("#image-decrease").onclick = () => {
+			console.log("Clicked decrease.");
+
+			const currIMG = document.querySelector("#currentImg");
+
+			let width = getComputedStyle(currIMG).getPropertyValue("width");
+			console.log(width);
+
+			width = parseInt(width);
+			console.log(width);
+			
+			if (width > 150) {
+				width = width - 20;
+				console.log(width);
+
+				currIMG.style.width = width + "px";
+			}
+		}
+		
+
+		document.querySelector("#simple-todo").onsubmit = () => {
+			let tableBody = document.querySelector("#simple-list tbody");
+
+			// tableBody.innerHTML = "<tr><td>New Item</td></tr>";
+
+			// tableBody.innerHTML = tableBody.innerHTML + "<tr><td>New Item</td></tr>";
+
+			// innerHTML is NOT an optimal way to create new HTML element
+
+
+
+			const input1 = document.querySelector("#name").value.trim();
+			if (input1.length == 0) {
+				validForm = false;
+				document.querySelector("#name-error").innerHTML = "This field is required.";
+			}
+			else {
+				document.querySelector("#name-error").innerHTML = '';
+			}
+
+			const input2 = document.querySelector("#price").value.trim();
+			console.log(input2)
+
+			if (input2.length == 0) {
+				validForm = false;
+				document.querySelector("#price-error").innerHTML = "This field is required.";
+			}
+			else {
+				document.querySelector("#price-error").innerHTML = '';
+			}
+
+			// create list item only when users fill out the form
+			if (input1.length > 0 && input2.length > 0) {
+				const listItems = document.querySelectorAll("#simple-list td");
+				/*
+				loop all the items to find duplicates
+				if duplicate found
+				- show error message
+				- terminate function
+				*/
+				for (item of listItems) {
+					if (input1 == item.innerHTML) {
+						alert(input1 + " is already in the list.");
+					return false;
+				}
+			}
+
+		// grab first item
+		const firstItem = document.querySelectorAll("#simple-list tbody tr")[0];
+
+		// Create element nodes
+		const imageURL = document.querySelector("#image").value.trim();
+		console.log(imageURL);
+
+		const tr = document.createElement("tr");
+		const nametd = document.createElement("td");
+		const pricetd = document.createElement("td");
+		const imagetd = document.createElement("td");
+		const buttontd = document.createElement("td");
+		const image = document.createElement("img");
+		const button = document.createElement("button");
+
+
+		if (imageURL.length > 0) {
+			console.log(imageURL);
+			image.src = imageURL;
+			image.alt = "Your image";
+		} 
+		else{
+			image.src = "https://t4.ftcdn.net/jpg/04/99/93/31/360_F_499933117_ZAUBfv3P1HEOsZDrnkbNCt4jc3AodArl.jpg";
+			image.alt = "Your image";
+		}
+
+
+
+		button.innerHTML = "Decrease Image Size"
+		button.classList.add("btn", "btn-outline-danger", "mb-3");
+
+		button.onclick = function(){
+			console.log("Clicked decrease.");
+
+			const currIMG = image;
+
+			let width = getComputedStyle(image).getPropertyValue("width");
+			console.log(width);
+
+			width = parseInt(width);
+			console.log(width);
+			
+			if (width > 150) {
+				width = width - 20;
+				console.log(width);
+
+				currIMG.style.width = width + "px";
+			}
+		}
+		nametd.innerHTML = input1;
+		pricetd.innerHTML = input2;
+
+		buttontd.appendChild(button);
+		imagetd.appendChild(image);
+		// Add elements to DOM
+		tr.appendChild(imagetd);
+		tr.appendChild(nametd);
+		tr.appendChild(pricetd);
+		tr.appendChild(buttontd);
+
+
+		// tableBody.appendChild(tr);
+		tableBody.insertBefore(tr, firstItem);
+
+		// clear input field
+		document.querySelector("#image").value = '';
+		document.querySelector("#name").value = '';
+		document.querySelector("#price").value = '';
+
+		}
+
+
+			return false;
+		}
+	</script>
+</body>
+</html>
+
+

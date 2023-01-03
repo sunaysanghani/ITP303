@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gallery Assignment 2 </title>
+
+<style>
+	body {
+		background-color:#ffb84d;
+	} 
+
+	h1 {
+		text-align:center;
+		color:white;
+		background-color: rgba(60, 60, 60, 0.5);
+		font-size:65px;
+		line-height:500px;
+		margin:0px;
+	}
+
+	img {
+		padding:15px;
+		height:100%;
+		width:100%;
+	}
+
+	#gallery {
+		margin:1px;
+	}
+
+	#header{
+		background-image: url('img/basketball2.jpg');
+		background-size:cover;
+		background-position: 20% 40%;
+		background-repeat:no-repeat;
+		height:500px;
+	}
+
+	#maincontainer{
+		background-color: white;
+		width:1045px;
+		margin-left:auto;
+		margin-right:auto;
+	}
+	#row1,#row2,#row3,#row4 {
+		margin-bottom:3px;
+		height: 320px;
+	}
+
+		#nav-wrapper {
+		background-color: #FC0;
+		border: black solid;
+	}
+
+	#nav-wrapper {
+		background-color: #FC0;
+		border: black solid;
+	}
+
+	
+	#nav {
+		width: 1000px;
+		margin-left: auto;
+		margin-right: auto;	
+		font-size:0;
+	}
+
+
+	#nav a {
+		background-color: #FC0;
+		width: 500px;
+		height: 50px;
+		line-height: 50px;
+		display: inline-block;
+		text-align: center;	
+		color: #000;
+		font-size:21px;
+	}
+	
+	#nav a:hover {
+		background-color: #000;
+		color: white;
+	}
+
+	#nav ul {
+	    list-style-type: none;
+	    padding: 0px;
+	    margin: 0px;
+	}
+	#nav li {
+	    width: 500px;
+	    display: inline-block;
+	    text-align: center;
+	    position: relative;
+	    z-index: 2;
+	}
+
+	#nav a.active {
+		background-color:#b38600;color:#fff;
+	}
+		
+		/* Style #nav ul ul using visibility and absolute */
+		/* Adjust the top based on line-height set in #nav li */
+		#nav ul ul {
+			position: absolute;
+			top: 50px; 
+			left: 0px;
+			visibility: hidden;
+		}
+		
+		/* Show #nav li:hover > ul */
+		#nav li:hover > ul {
+			visibility: visible;
+		}
+
+
+	.image1 {height:250px; width:auto; display:inline-block;overflow:hidden;opacity:0.65;}
+	.image2 {height:250px; width:auto; display:inline-block;overflow:hidden; opacity:0.65;}
+	.image3 {height:250px; width:auto; display:inline-block;overflow:hidden; opacity:0.65;}
+
+	.image4 {height:250px; width:auto; display:inline-block;overflow:hidden; opacity:0.65;}
+	.image5 {height:250px; width:auto; display:inline-block;overflow:hidden; opacity:0.65;}
+	.image6 {height:250px; width:auto; display:inline-block;overflow:hidden; opacity:0.65;}
+
+	.image7 {height:250px; width:auto; display:inline-block;overflow:hidden; opacity:0.65;}
+	.image8 {height:250px; width:auto; display:inline-block;overflow:hidden; opacity:0.65;}
+	.image9 {height:250px; width:auto; display:inline-block;overflow:hidden; opacity:0.65;}
+
+	.image10 {height:250px; width:auto; display:inline-block;overflow:hidden; opacity:0.65;}
+	.image11 {height:250px; width:auto; display:inline-block;overflow:hidden; opacity:0.65;}
+	.image12 {height:250px; width:auto; display:inline-block;overflow:hidden; opacity:0.65;}
+
+	#footer {
+		background-color:saddlebrown;
+		text-align:center;
+		padding-top:1px;
+		padding-bottom:1px;
+		font-size:19px;
+		font-style:italic;
+	}
+	
+
+	.thumbnailcontainer {height:250px; width:auto; display:inline-block;overflow:visible; opacity:0.75;}
+
+	.thumbnailcontainer p{
+		visibility:hidden;
+	}
+
+	.thumbnailcontainer:hover p{
+		visibility:visible;
+		text-align:center;
+	}
+
+	.thumbnail:hover {
+		opacity:1;
+	}
+
+	.thumbnail {height:250px; width:auto; display:inline-block;overflow:hidden; opacity:0.75;}
+
+</style>
+</head>
+
+<body>
+<div id="header">
+	<h1>Gallery</h1>
+</div>
+
+<div id="nav-wrapper">
+	<div id="nav">
+		<ul>
+			<li>
+				<a href="index.html">Home</a>
+				<ul>
+					<li><a href="index.html#about">About</a></li>
+					<li><a href="index.html#play">Play</a></li>
+					<li><a href="index.html#equip">Equipment and Specifications</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="gallery.html"  class="active">Gallery</a>
+			</li>
+		</ul>
+	</div>
+</div>
+
+
+<div id="maincontainer">
+<div id="gallery">
+	<div class="row1">
+		<div class="thumbnailcontainer">
+			<div class="thumbnail">
+				<img src="img/img1.jpeg" alt="1">
+			</div>
+			<p> Wilson Basketball </p>
+		</div>
+		<div class="thumbnailcontainer">
+			<div class="thumbnail">
+				<img src="img/img2.jpg" alt="2">
+			</div>
+			<p> Player Shooting Free Throw </p>
+		</div>
+
+		<div class="thumbnailcontainer">
+			<div class="thumbnail">
+				<img src="img/img3.jpg" alt="3">
+			</div>
+			<p> Center Court </p>
+		</div>
+	</div>
+
+	<div class="row2">
+		<div class="thumbnailcontainer">
+			<div class="thumbnail">
+				<img src="img/img4.jpg" alt="4">
+			</div>
+			<p> Three Point Shot </p>
+		</div>
+
+		<div class="thumbnailcontainer">
+			<div class="thumbnail">
+				<img src="img/img5.jpeg" alt="5">
+			</div>
+			<p> Boxing Out for A Rebound </p>
+		</div>	
+
+		<div class="thumbnailcontainer">
+			<div class="thumbnail">
+				<img src="img/img6.jpg" alt="6">
+			</div>
+			<p> How to Shoot </p>
+		</div>
+	</div>
+	<div class="row3">
+		<div class="thumbnailcontainer">
+			<div class="thumbnail">
+				<img src="img/img7.jpg" alt="7">
+			</div>
+			<p> FIBA player celebrating </p>
+		</div>
+
+		<div class="thumbnailcontainer">
+			<div class="thumbnail">
+				<img src="img/img8.jpg" alt="8">
+			</div>
+			<p> WNBA Player in action </p>
+		</div>	
+
+		<div class="thumbnailcontainer">
+			<div class="thumbnail">
+				<img src="img/img12.jpg" alt="9">
+			</div>
+			<p> How to Pass </p>
+		</div>
+	</div>
+	<div class="row4">
+		<div class="thumbnailcontainer">
+				<div class="thumbnail">
+					<img src="img/img10.jpg" alt="10">
+				</div>
+				<p> Bounce Pass </p>
+			</div>
+
+			<div class="thumbnailcontainer">
+				<div class="thumbnail">
+					<img src="img/img11.jpg" alt="11">
+				</div>
+				<p> Customer Jersey Design </p>
+			</div>	
+
+			<div class="thumbnailcontainer">
+				<div class="thumbnail">
+					<img src="img/img9.jpg" alt="12">
+				</div>
+				<p> James Naismith </p>
+		</div>
+	</div>
+
+	</div>
+</div> <!--gallery div-->
+
+<div id="footer">
+	<p>University of Southern California</p>
+</div>
+
+</body>
+</html>

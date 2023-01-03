@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Assignment 05</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+<style>
+	label{
+		padding:2px;
+	}
+	#area{
+		height:100px;
+		width:300px;
+	}
+</style>
+</head>
+
+<body>
+<div class="container">
+	<div class="row">
+			<h2 class="col-12 mt-5 mb-4">Signup Form</h2>
+			<div class="col-12">
+
+				<form id="signup-form" action="confirmation.html">
+
+					<div class="form-group row">
+						<label for="name" class="col-sm-2 col-form-label">Full Name:</label>
+						<div class="col-sm-10">
+							<input type="text" name="name" class="form-control" placeholder="Tommy Trojan" id="name">
+
+							<small id="name-error" class="form-text text-danger"></small>
+
+						</div>
+					</div> <!-- .form-group -->
+
+					<div id="provide-one-row" class="col-6 col-md-4">
+						<p> Provide One: </p>
+						<div class="form-group row">
+							<label for="email" class="col-sm-2 col-form-label">Email:  </label>
+							<div class="col-sm-10">
+								<input type="text" name="email" class="form-control" placeholder="ttrojan@usc.edu" id="email">
+
+								<small id="email-error" class="form-text text-danger"></small>
+
+							</div>
+						</div> <!-- .form-group -->
+
+						<div class="form-group row">
+							<label for="phone" class="col-sm-2 col-form-label">Phone:  </label>
+
+							<div class="col-sm-10">
+								<input type="text" name="phone" class="form-control" placeholder="123-456-7890" id="phone">
+
+								<small id="phone-error" class="form-text text-danger"></small>
+
+							</div>
+						</div> <!-- .form-group -->
+					</div>
+
+
+					<div class="form-group row">
+						<label id="textmessage" class="col-sm-2 col-form-label">Message:</label>
+						<textarea id="area"></textarea>
+						<p id="characterCount">0/500</p>
+						<small id="message-error" class="form-text text-danger"></small>
+					</div>
+
+
+					
+
+
+
+					<div class="form-group row">
+						<div class="col-sm-10">
+							<label><input type="checkbox" id="okay" value="ok">I accept the Terms &amp; Conditions</label>
+							<small id="terms-error" class="form-text text-danger"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<div class="col-sm-10">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div> <!-- .col -->
+					</div>
+
+				</form>
+				
+			</div> <!-- .col -->
+	</div>
+</div>
+
+
+
+
+
+	<script>
+
+		var characterCount = 0;
+		document.querySelector("#area").onkeypress = function(){
+			characterCount = characterCount + 1;
+			let text = characterCount.toString();
+			document.querySelector("#characterCount").innerHTML = text + "/500";
+			
+			document.onkeydown = function(e){
+				console.log(e.code);
+				if(e.code == "Backspace" && characterCount > 0){
+					characterCount = characterCount - 1;
+					let text = characterCount.toString();
+					document.querySelector("#characterCount").innerHTML = text + "/500";
+				}
+			}
+		}
+
+		document.querySelector("#signup-form").onsubmit = function() {
+			console.log("Form Submitted");
+
+			let validForm = true;
+
+			const name = document.querySelector("#name").value;
+			console.log(name);
+
+			if (name.indexOf(' ') == -1) {
+				validForm = false;
+				console.log("valid form false");
+				document.querySelector("#name-error").innerHTML = 'You must provide a full name.';
+			} else if (name == ''){
+				validForm = false;
+				document.querySelector("#name-error").innerHTML = 'Name cannot be empty.';
+			}
+			else {
+				document.querySelector("#name-error").innerHTML = '';
+			}
+
+			const phone = document.querySelector("#phone").value;
+			console.log(phone);
+
+			const email = document.querySelector("#email").value.trim();
+			console.log(email);
+
+
+			if (phone.length == 0 && email.length == 0) {
+				validForm = false;
+				console.log("valid form false");
+				document.querySelector("#phone-error").innerHTML = 'You must provide either email or phone.';
+			} else {
+				document.querySelector("#phone-error").innerHTML = '';
+			}
+
+
+			if(email.length != 0){
+				if (email.indexOf('@') == -1) {
+					validForm = false;
+					document.querySelector("#email-error").innerHTML = 'Email must contain "@" character.';
+				}
+			} else {
+				document.querySelector("#email-error").innerHTML = '';
+			}
+
+			const message = document.querySelector("#area").value;
+
+			if (message.length == 0) {
+				validForm = false;
+				document.querySelector("#message-error").innerHTML = 'Message cannot be empty';
+			} else if(characterCount > 500) {
+					validForm = false;
+		 			document.querySelector("#message-error").innerHTML = 'Message cannot exceed 500 characters.';
+			} else {
+					document.querySelector("#message-error").innerHTML = '';
+			}
+			
+			
+
+			if (document.querySelector("#okay").checked == false) {
+				validForm = false;
+				console.log("valid form false");
+				document.querySelector("#terms-error").innerHTML = 'You must accept Terms & Conditions.';
+			}
+			else{
+				document.querySelector("#terms-error").innerHTML = '';
+			}
+
+			return validForm;
+		}
+
+		
+				
+				
+		
+
+	</script>
+</body>
+
+</html>

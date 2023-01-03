@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sunay Sanghani | Student Page</title>
+	
+
+	<style>
+		img {
+			width:auto;
+			height:200px;
+		}
+
+
+		strong {
+			color:white;
+			background-color:blue;
+			text-align:center;
+			padding:10px;
+		}
+
+
+
+
+	@media (min-width: 767px){
+		
+		img {
+			width:auto;
+			height:auto;
+		}
+
+		#container{	
+			display:flex;
+		}
+
+		.left{
+			width:50%;
+		}
+
+		.right{
+			display:flex;
+		}
+
+		#column1, #column2, #column3{
+			width:50%;
+			padding:5px;
+		}
+	}
+
+	@media (min-width:991px){
+		img {
+			width:auto;
+			height:auto;
+		}
+
+		#container{	
+			display:flex;
+		}
+
+		.left{
+			width:50%;
+		}
+
+		.right{
+			display:flex;
+		}
+
+		#column1, #column2, #column3{
+			width:50%;
+			padding:5px;
+		}
+
+		strong {
+			color:white;
+			background-color:blue;
+			text-align:center;
+			padding:0px;
+		}
+	}
+
+	</style>
+</head>
+
+<body>
+	<h1>Sunay Sanghani</h1>
+	<p> Email adress: <a href="mailto:sunaysan@usc.edu"> sunaysan@usc.edu.</a></p>
+	<div id="container">
+		<div id="left">
+				<p> Favorite Color: <strong>Blue</strong></p>
+				<p> Favorite Wesbite: <a href="http://www.bleacherreport.com">Bleacher Report</a></p>
+				<h2>Favorite activity</h2>
+				<img src="basketball.jpg" alt="Playing basketball">
+		</div>
+	
+
+		<div class="right">
+			<div class="column2">
+				<h3>School Schedule</h3>
+				<!-- orderled list of classes -->
+				<ol>
+					</li><li> DSCI 429
+					</li><li> ITP 303
+					</li><li> ECON 318
+					</li><li> ECON 357
+					</li><li> PHED 160
+				</li></ol>
+			</div>
+
+
+			<div class="column3">
+				<!-- unordered list of assignments -->
+				<h3>Assignments</h3>
+				<ul>
+					<li><a href="student_page.html">Assignment 01</a></li>
+					<li><a href="assignment02/index.html">Assignment 02</a></li>
+					<li><a href="assignment03/student_page.html">Assignment 03</a></li>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+
+	
+</body>
+</html>

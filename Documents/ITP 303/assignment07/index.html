@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Assignment 07</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<style>
+
+		.resizeElem {
+			width: 50%;
+			height: 50%;
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 100%;
+			height: 100%;
+		}
+
+		.center {
+			text-align: center;
+			margin-bottom: 100px;
+			position: relative;
+		}
+
+		.overlay {
+			visibility: hidden;
+		}
+
+		.center:hover .overlay {
+			visibility: visible;
+		}
+
+		.overlay {
+			position: absolute;
+			text-align: center;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			margin-left: 5%;
+			margin-right: 20%;
+		}
+
+		.text {
+			text-align:center;
+			overflow:hidden;
+			margin-left: 5%;
+			margin-right: 10%;
+		}
+
+		.movies {
+			margin-top: 50px;
+		}
+
+		.center:hover img {
+			opacity: 0.2;
+			visibility: visible;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<h1 class="col-12 mt-4">Movie Data Base Search</h1>
+		</div> <!-- .row -->
+
+		<div class="row">
+			<form class="col-12" id="search-form">
+				<div class="form-row">
+					<div class="col-12 mt-4 col-sm-6 col-lg-4">
+						<label for="search-query" class="sr-only">Search:</label>
+						<input type="text" class="form-control" id="search-query" placeholder="Search...">
+
+						<small id="search-error" class="form-text text-danger"></small>
+
+					</div>
+
+					<div class="col-12 mt-4 col-sm-auto">
+						<button type="submit" class="btn btn-primary">Search</button>
+					</div>
+				</div> <!-- .form-row -->
+			</form>
+		</div> <!-- .row -->
+		<div class="row">
+			<div class="col-12 mt-4">
+
+				Showing <span id="num-results" class="font-weight-bold">0</span> of <span id="total-results" class="font-weight-bold">0</span> result(s).
+
+			</div>
+		</div>
+		<div class="row movies">
+		</div>
+
+
+
+	</div> <!-- .row -->
+</div> <!-- .container -->
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script>
+
+
+	$.ajax({
+		url: "https://api.themoviedb.org/3/movie/now_playing?api_key=a2c0823216fe1dfe1c99ef4dacde84b3&language=en-US&sort_by=popularity.desc&page=1",
+		dataType: "json"
+	}).then((data) => {
+		console.log(data);
+
+		document.querySelector("#num-results").innerHTML = data.results.length;
+
+		document.querySelector("#total-results").innerHTML = data.total_results;
+
+		
+			createARow(data);
+		
+
+	}).fail((error) => {
+		alert("AJAX error");
+		console.log(error);
+	})
+
+
+	document.querySelector('#search-form').onsubmit = function(){
+		var term = document.querySelector('#search-query').value.trim();
+// var limit = document.querySelector('#search-limit').value.trim();
+
+	if (term.length == 0) {
+		document.querySelector("#search-error").innerHTML = "You must write a search.";
+	}
+	else if (term.length > 0) {
+		const url = `https://api.themoviedb.org/3/search/movie?api_key=0231da3e70da0e12e9526aecd80acb8f&language=en-US&query=${term}`;
+		
+
+		$.ajax({
+			url: url,
+			dataType: "json"
+		}).then((data) => {
+			console.log(data);
+
+			document.querySelector("#num-results").innerHTML = data.results.length;
+
+			document.querySelector("#total-results").innerHTML = data.total_results;
+
+			clearResults();
+			createARow(data);
+			document.querySelector("#search-error").innerHTML = ``;
+
+
+		}).fail((error) => {
+			alert("AJAX error");
+			console.log(error);
+		});
+	}
+	document.querySelector("#search-query").innerHTML = ``;
+			console.log("search term cleared");
+	return false;
+}
+
+	document.querySelector("#search-query").innerHTML = ``;
+			console.log("search term cleared");
+
+	function createARow(movie){
+
+
+		for (film of movie.results){
+
+
+			var outerDiv = document.createElement("outerDiv");
+			outerDiv.classList.add("col-lg-3", "col-md-4", "col-sm-6", "col-6", "center");
+			var img = document.createElement("img");
+
+			if (film.poster_path == null) {
+				img.src = "https://media.comicbook.com/files/img/default-movie.png"
+			}
+			else {
+				img.src = "https://image.tmdb.org/t/p/w500/" + film.poster_path;
+			}
+
+			img.classList.add("resizeElem");
+
+			var overlayText = document.createElement("div");
+			overlayText.classList.add("overlay");
+			var desc = document.createElement("div");
+			desc.classList.add("text");
+			desc.innerHTML = film.overview;
+
+			overlayText.appendChild(desc);
+
+
+			var title = document.createElement("div");
+			title.innerHTML = "Title: " + film.title;
+			var releaseDate = document.createElement("div");
+			releaseDate.innerHTML = "Release Date: " + film.release_date;
+			var rating = document.createElement("div");
+			rating.innerHTML = "Rating: " + film.vote_average;
+
+			outerDiv.appendChild(img);
+			outerDiv.appendChild(overlayText);
+			outerDiv.appendChild(title);
+			outerDiv.appendChild(releaseDate);
+			outerDiv.appendChild(rating);
+
+			document.querySelector(".movies").appendChild(outerDiv);
+		}
+	}
+
+	function clearResults() {
+		var oldResults = document.querySelector(".movies");
+		while(oldResults.firstChild) {
+			oldResults.removeChild(oldResults.firstChild);
+		}
+	}
+
+</script>
+</body>
+</html>
